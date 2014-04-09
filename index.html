@@ -52,6 +52,14 @@
 					<h2>親コミットと子コミットの話</h2>
 					<!-- <p></p> -->
 					<img class="fragment" src="images/commitgraph.png"/>
+					<div id="canvas"></div>
+					<script type="text/javascript">
+						window.onload = function () {
+							var paper = Raphael("canvas", 640, 480);
+							paper.clear();
+							paper.rect(0, 0, 200, 300).attr({fill: "#fff"});
+						};
+					</script>
 
 					<aside class="notes">
 						<ul>
@@ -359,6 +367,7 @@ function linkify( selector ) {
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
+		<script src="js/raphael.js"></script>
 
 		<script>
 
