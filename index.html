@@ -19,8 +19,8 @@
 	<link rel="stylesheet" href="css/highlight-default.min.css">
 	<script src="js/highlight.min.js"></script>
 	<script src="js/jquery.min.js"></script>
-	<script src="js/murmurhash.js"></script>
-	<script src="js/mystuff.js"></script>
+	<!--<script src="js/murmurhash.js"></script>-->
+	<!--<script src="js/mystuff.js"></script>-->
 	<script>hljs.initHighlightingOnLoad();</script>
 
 	<script>
@@ -93,9 +93,39 @@
 			</div>
     </div>
 
-    <div class="step title" data-x="3000" data-y="0">
+    <div class="step problem" data-x="-8000" data-y="5000" data-rotate="90" data-scale="5">
 			<div class="centerdiv">
-				<h1>・・・ん？</h1>
+				<h2>答①</h2>
+				<p style="text-align: center; color: blue;"><strong>file</strong></p>
+				<pre><code class="bash">$ file crackme</code>
+crackme: ELF 64-bit LSB <b class="scaling">executable</b> x86-64,
+version 1 (SYSV), dynamically linked (uses
+shared libs), for GNU/Linux 2.6.26, not
+stripped
+<code class="bash">$</code></pre>
+			</div>
+    </div>
+
+    <div class="step problem wide" data-x="3500" data-y="0">
+			<div class="centerdiv">
+				<h2>テストレポジトリを作成</h2>
+				<pre>$ <code class="bash">mkdir testrepo &amp;&amp; cd testrepo</code>
+$ <code class="bash">git init .</code>
+Initialized empty Git repository in ~/testrepo/.git/
+$ <code class="bash">git config user.name "Test User"</code>
+$ <code class="bash">git config user.email "testuser@example.com"</code></pre>
+			</div>
+    </div>
+
+    <div class="step problem" data-x="5000" data-y="0">
+			<div class="centerdiv">
+				<h2>テストコミット</h2>
+				<pre>$ <code class="bash">touch README</code>
+$ <code class="bash">git add .</code>
+$ <code class="bash">git commit -m "Initial commit."</code>
+[master (root-com) 54b450] Initial commit.
+ 0 files changed
+  create mode 100644 README</pre>
 			</div>
     </div>
 
