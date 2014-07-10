@@ -129,6 +129,38 @@ $ <code class="bash">git commit -m "Initial commit."</code>
 			</div>
     </div>
 
+    <div class="step problem" data-x="6500" data-y="0">
+			<div class="centerdiv">
+				<h2>前回の復習①</h2>
+				<pre>$ <code class="bash">cat .git/HEAD</code>
+ref: refs/heads/master
+$ <code class="bash">cat .git/refs/heads/master</code>
+54b450dd7d7c8280040569fc7b5e4637883e76c2
+$ <code class="bash">cat .git/objects/54/b450dd7d7c82*</code>
+...</pre>
+			</div>
+    </div>
+
+    <div class="step problem wide" data-x="8000" data-y="0">
+			<div class="centerdiv">
+				<h2>前回の復習②</h2>
+				<pre>$ <code class="bash">tree .git/</code>
+<span class="directoryblue">.git</span>/
+├── HEAD  <span class="linkyellow" >( -&gt; refs/heads/master )</span>
+├── <span class="directoryblue">objects</span>/
+│   ├── <span class="directoryblue">54</span>/
+│   │   ├── 3b9bebdc6bd5c4b22136034a95dd097a57d3dd
+│   │   └── b450dd7d7c8280040569fc7b5e4637883e76c2
+│   └── <span class="directoryblue">e6</span>/
+│       └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+└── <span class="directoryblue">refs</span>/
+    ├── <span class="directoryblue">heads</span>/
+    │   └── master  <span class="linkyellow" >( -&gt; objects/56/b450dd7d7c82800... )</span>
+    └── <span class="directoryblue">tags</span>/</pre>
+			</div>
+    </div>
+
+		<!--
     <div class="step title" data-x="6000" data-y="0">
 			<div class="centerdiv">
 				<h2>簡単に説明する</h2>
@@ -167,6 +199,7 @@ $ <code class="bash">git commit -m "Initial commit."</code>
 				</ul>
 			</div>
     </div>
+		-->
 
     <div class="step title" data-x="11500" data-y="0">
 			<div class="centerdiv">

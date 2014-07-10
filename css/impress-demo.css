@@ -336,6 +336,14 @@ a:focus {
 	margin-top: 10px;
 }
 
+.directoryblue {
+	color: #8888FF;
+}
+
+.linkyellow {
+	color: #B8860B;
+}
+
 /*
     And now we start to style each step separately.
 
