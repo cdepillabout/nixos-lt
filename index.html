@@ -160,6 +160,49 @@ $ <code class="bash">cat .git/objects/54/b450dd7d7c82*</code>
 			</div>
     </div>
 
+    <div class="step problem" data-x="9500" data-y="0">
+			<div class="centerdiv">
+				<h2>子コミット</h2>
+				<pre>$ <code class="bash">echo "hogehoge" &gt;&gt; README</code>
+$ <code class="bash">git add README</code>
+$ <code class="bash">git commit -m "Child commit."</code>
+[master ac07971] Child commit.
+ 1 file changed, 1 insertion(+)</pre>
+			</div>
+    </div>
+
+    <div class="step problem" data-x="11000" data-y="0">
+			<div class="centerdiv">
+				<div style="background: white; margin-bottom: 50px;">
+					<p>.git/HEAD</p>
+					<p>.git/refs/heads/master</p>
+				</div>
+				<h2>どう変わった？</h2>
+			</div>
+		</div>
+
+    <div class="step problem" data-x="12500" data-y="0">
+			<div class="centerdiv">
+				<h2>最初のコミット：HEAD</h2>
+				<pre>$ <code class="bash">cat .git/HEAD</code>
+ref: refs/heads/master</pre>
+			</div>
+		</div>
+
+    <div class="step problem" data-x="12500" data-y="500">
+			<div class="centerdiv">
+				<h2>二番目のコミット：HEAD</h2>
+				<pre>$ <code class="bash">cat .git/HEAD</code>
+ref: refs/heads/master</pre>
+			</div>
+		</div>
+
+    <div class="step problem" data-x="17000" data-y="0">
+			<div class="centerdiv">
+				<h2>どう</h2>
+			</div>
+		</div>
+
 		<!--
     <div class="step title" data-x="6000" data-y="0">
 			<div class="centerdiv">
@@ -201,6 +244,7 @@ $ <code class="bash">cat .git/objects/54/b450dd7d7c82*</code>
     </div>
 		-->
 
+		<!--
     <div class="step title" data-x="11500" data-y="0">
 			<div class="centerdiv">
 				<h2>例</h2>
@@ -286,6 +330,7 @@ $ <code class="bash">cat .git/objects/54/b450dd7d7c82*</code>
 				<p style="text-align: center; font-size: 190px;">fin</p>
 			</div>
     </div>
+		-->
 
 		<!--
     <div class="step title" data-x="200" data-y="5000" data-rotate="90" data-scale="5">
