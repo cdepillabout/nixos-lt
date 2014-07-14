@@ -191,15 +191,84 @@ ref: refs/heads/master</pre>
 
     <div class="step problem" data-x="12500" data-y="500">
 			<div class="centerdiv">
-				<h2>二番目のコミット：HEAD</h2>
+				<h2>二回目のコミット：HEAD</h2>
 				<pre>$ <code class="bash">cat .git/HEAD</code>
 ref: refs/heads/master</pre>
 			</div>
 		</div>
 
-    <div class="step problem" data-x="17000" data-y="0">
+    <div class="step problem" data-x="12500" data-y="1000">
 			<div class="centerdiv">
-				<h2>どう</h2>
+				<h3>コミットを何回しても、HEADが参照しているブランチが変わらない</h3>
+			</div>
+		</div>
+
+    <div class="step problem" data-x="14000" data-y="0">
+			<div class="centerdiv">
+				<h2>最初のコミット：<br/>masterブランチ</h2>
+				<pre>$ <code class="bash">cat .git/refs/heads/master</code>
+54b450dd7d7c8280040569fc7b5e4637883e76c2</pre>
+			</div>
+		</div>
+
+    <div class="step problem" data-x="14000" data-y="500">
+			<div class="centerdiv">
+				<h2>二回目のコミット：<br/>masterブランチ</h2>
+				<pre>$ <code class="bash">cat .git/refs/heads/master</code>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
+			</div>
+		</div>
+
+    <div class="step problem" data-x="14000" data-y="1000">
+			<div class="centerdiv">
+				<h3>コミットをするたびに、masterブランチが参照しているコミットが変わらない</h3>
+			</div>
+		</div>
+
+    <div class="step problem wide" data-x="15500" data-y="0">
+			<div class="centerdiv">
+				<h2>親コミット <span style="font-size: 60px;">and</span> 子コミット</h2>
+				<pre>$ <code class="bash">git log --pretty=raw</code>
+commit: ac07971895
+<span class="directoryblue">parent: 54b450dd7d</span>
+author: &lt;testuser@example.com&gt; Jul 13 14:51:49
+
+    Child commit.
+
+commit: 54b450dd7d
+author: &lt;testuser@example.com&gt; Jul 8 18:36:36
+
+    Initial commit.</pre>
+			</div>
+		</div>
+
+    <div class="step problem" data-x="15500" data-y="500">
+			<div class="centerdiv">
+				<h3>子コミットが親コミットを参照している</h3>
+			</div>
+		</div>
+
+    <div class="step problem" data-x="17500" data-y="0">
+			<div class="centerdiv">
+				<h2>コマンド紹介</h2>
+			</div>
+		</div>
+
+    <div class="step problem" data-x="19000" data-y="0">
+			<div class="centerdiv">
+				<h2>git branch</h2>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="20500" data-y="0">
+			<div class="centerdiv">
+				<h2>全部のブランチを表示</h2>
+				<pre>$ <code class="bash">git branch --verbose --all</code>
+* <span style="color: green;">master</span> ac07971 Child commit.</pre>
+				<ul>
+					<li>masterブランチしかない</li>
+					<li>コミットハッシュとコミットメッサーじも見れる</li>
+				</ul>
 			</div>
 		</div>
 
