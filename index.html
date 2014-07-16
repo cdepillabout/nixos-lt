@@ -267,7 +267,115 @@ author: &lt;testuser@example.com&gt; Jul 8 18:36:36
 * <span style="color: green;">master</span> ac07971 Child commit.</pre>
 				<ul>
 					<li>masterブランチしかない</li>
-					<li>コミットハッシュとコミットメッサーじも見れる</li>
+					<li>コミットハッシュとコミットメッセージも見れる</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="20500" data-y="700">
+			<div class="centerdiv">
+				<h2>ブランチ追加</h2>
+				<pre>$ <code class="bash">git branch newbranch</code>
+$ <code class="bash">git branch --verbose --all</code>
+* <span style="color: green;">master</span>     ac07971  Child commit.
+  newbranch  ac07971  Child commit.</pre>
+				<ul>
+					<li>newbranchが作られた</li>
+					<li>masterと同じコミットを参照している</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="20500" data-y="1600">
+			<div class="centerdiv">
+				<h2>.git確認①</h2>
+
+<!--
+				<pre>$ <code class="bash">tree .git/</code>
+<span class="directoryblue">.git</span>/
+├── HEAD  <span class="linkyellow" >( -&gt; refs/heads/master )</span>
+├── <span class="directoryblue">objects</span>/
+│   ├── <span class="directoryblue">54</span>/
+│   │   ├── 3b9bebdc6bd5c4b22136034a95dd097a57d3dd
+│   │   └── b450dd7d7c8280040569fc7b5e4637883e76c2
+│   └── <span class="directoryblue">e6</span>/
+│       └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+└── <span class="directoryblue">refs</span>/
+    ├── <span class="directoryblue">heads</span>/
+    │   └── master  <span class="linkyellow" >( -&gt; objects/56/b450dd7d7c82800... )</span>
+    └── <span class="directoryblue">tags</span>/</pre>
+-->
+
+				<pre>$ <code class="bash">tree .git/</code>
+<div style="font-size: 32px; line-height: 120%;"><span class="directoryblue">.git</span>/
+├── HEAD
+├── <span class="directoryblue">objects</span>
+│   ├── <span class="directoryblue">54</span>
+│   │   └── b450dd7d7c
+│   └── <span class="directoryblue">ac</span>
+│       └── 0797189547
+└── <span class="directoryblue">refs</span>
+    └── <span class="directoryblue">heads</span>
+        ├── master
+        └── newbranch</div></pre>
+				<ul>
+					<li>newbranchが作られた</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="20500" data-y="2400">
+			<div class="centerdiv">
+				<h2>.gitで確認②</h2>
+				<pre>$ <code class="bash">cat .git/HEAD</code>
+ref: refs/heads/master
+$ <code class="bash">cat .git/refs/heads/master</code>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
+				<ul>
+					<li>HEADはmasterブランチを参照</li>
+					<li>masterはさきの子コミットを参照</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="20500" data-y="3200">
+			<div class="centerdiv">
+				<h2>.gitで確認③</h2>
+				<pre>$ <code class="bash">cat .git/refs/heads/newbranch</code>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
+				<ul>
+					<li>.git/refs/heads/newbranchが作られた</li>
+					<li>masterと同じコミットを参照している</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title wide" data-x="20500" data-y="4000">
+			<div class="centerdiv">
+				<h2>図</h2>
+				<pre>$ <code class="bash">tree .git/</code>
+<div style="font-size: 32px; line-height: 125%;"><span class="directoryblue">.git</span>/
+├── HEAD  <span class="linkyellow" >( -&gt; refs/heads/master )</span>
+├── <span class="directoryblue">objects</span>
+│   ├── <span class="directoryblue">54</span>
+│   │   └── b450dd7d7c
+│   └── <span class="directoryblue">ac</span>
+│       └── 0797189547  <span class="linkyellow" >( 親： -&gt; objects/54/b450dd7d7c )</span>
+└── <span class="directoryblue">refs</span>
+    └── <span class="directoryblue">heads</span>
+        ├── master  <span class="linkyellow" >( -&gt; objects/ac/0797189547 )</span>
+        └── newbranch  <span class="linkyellow" >( -&gt; objects/ac/0797189547 )</span></div></pre>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="20500" data-y="4800">
+			<div class="centerdiv">
+				<h2>またコミットしてみよう</h2>
+				<pre>$ <code class="bash">cat .git/refs/heads/newbranch</code>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
+				<ul>
+					<li>.git/refs/heads/newbranchが作られた</li>
+					<li>masterと同じコミットを参照している</li>
 				</ul>
 			</div>
 		</div>
