@@ -11,6 +11,7 @@
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
 
 	<link href="css/impress-demo.css" rel="stylesheet" />
+	<link href="css/ansi2html.css" rel="stylesheet" />
 
 	<link rel="shortcut icon" href="favicon.png" />
 	<link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -354,7 +355,7 @@ ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
     <div class="step problem title" data-x="20500" data-y="4800">
 			<div class="centerdiv">
 				<h2>またコミットしてみよう</h2>
-				<pre>$ <code class="bash">echo foobar &lt;&lt; README</code>
+				<pre>$ <code class="bash">echo foobar &gt;&gt; README</code>
 $ <code class="bash">git add README</code>
 $ <code class="bash">git commit -m "Second child commit."</code>
 [master 22c3956] Second child commit.
@@ -363,7 +364,26 @@ $ <code class="bash">git commit -m "Second child commit."</code>
 			</div>
 		</div>
 
+    <div class="step problem title" data-x="20500" data-y="5600">
+			<div class="centerdiv">
+				<h2>git log</h2>
+				<pre>$ <code class="bash">git log --graph --decorate --all </code>
+* <span class="f3">commit 22c39561 (<span class="bold"><span class="f6">HEAD</span></span>, <span class="bold"><span class="f2">master</span></span>)</span>
+<span class="f1">|</span> Date:   Fri Jul 18 18:25:20 2014 +0900
+<span class="f1">|</span>
+<span class="f1">|</span>     Second child commit.
+<span class="f1">|</span>
+* <span class="f3">commit ac079718 (<span class="bold"><span class="f2">newbranch</span></span>)</span>
+<span class="f1">|</span> Date:   Fri Jul 11 14:51:49 2014 +0900
+<span class="f1">|</span>
+<span class="f1">|</span>     Child commit.
+<span class="f1">|</span>
+* <span class="f3">commit 54b450dd</span>
+  Date:   Tue Jul 8 18:36:36 2014 +0900
+
+      Initial commit.</pre>
 			</div>
+		</div>
 
 		<!--
     <div class="step title" data-x="6000" data-y="0">
