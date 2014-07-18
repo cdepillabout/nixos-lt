@@ -289,23 +289,6 @@ $ <code class="bash">git branch --verbose --all</code>
     <div class="step problem title" data-x="20500" data-y="1600">
 			<div class="centerdiv">
 				<h2>.git確認①</h2>
-
-<!--
-				<pre>$ <code class="bash">tree .git/</code>
-<span class="directoryblue">.git</span>/
-├── HEAD  <span class="linkyellow" >( -&gt; refs/heads/master )</span>
-├── <span class="directoryblue">objects</span>/
-│   ├── <span class="directoryblue">54</span>/
-│   │   ├── 3b9bebdc6bd5c4b22136034a95dd097a57d3dd
-│   │   └── b450dd7d7c8280040569fc7b5e4637883e76c2
-│   └── <span class="directoryblue">e6</span>/
-│       └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
-└── <span class="directoryblue">refs</span>/
-    ├── <span class="directoryblue">heads</span>/
-    │   └── master  <span class="linkyellow" >( -&gt; objects/56/b450dd7d7c82800... )</span>
-    └── <span class="directoryblue">tags</span>/</pre>
--->
-
 				<pre>$ <code class="bash">tree .git/</code>
 <div style="font-size: 32px; line-height: 120%;"><span class="directoryblue">.git</span>/
 ├── HEAD
@@ -371,14 +354,16 @@ ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
     <div class="step problem title" data-x="20500" data-y="4800">
 			<div class="centerdiv">
 				<h2>またコミットしてみよう</h2>
-				<pre>$ <code class="bash">cat .git/refs/heads/newbranch</code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
-				<ul>
-					<li>.git/refs/heads/newbranchが作られた</li>
-					<li>masterと同じコミットを参照している</li>
-				</ul>
+				<pre>$ <code class="bash">echo foobar &lt;&lt; README</code>
+$ <code class="bash">git add README</code>
+$ <code class="bash">git commit -m "Second child commit."</code>
+[master 22c3956] Second child commit.
+ 1 file changed, 1 insertion(+)
+</pre>
 			</div>
 		</div>
+
+			</div>
 
 		<!--
     <div class="step title" data-x="6000" data-y="0">
