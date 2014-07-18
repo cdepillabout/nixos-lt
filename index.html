@@ -385,6 +385,22 @@ $ <code class="bash">git commit -m "Second child commit."</code>
 			</div>
 		</div>
 
+    <div class="step problem title" data-x="20500" data-y="3200">
+			<div class="centerdiv">
+				<h2>.gitで確認④</h2>
+				<pre>$ <code class="bash">cat .git/refs/heads/newbranch</code>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
+$ <code class="bash">cat .git/refs/heads/master</code>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
+$ <code class="bash">cat TODO!!!!!!!!!!!.git/refs/heads/newbranch</code>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
+				<ul>
+					<li>.git/refs/heads/newbranchが作られた</li>
+					<li>masterと同じコミットを参照している</li>
+				</ul>
+			</div>
+		</div>
+
 		<!--
     <div class="step title" data-x="6000" data-y="0">
 			<div class="centerdiv">
