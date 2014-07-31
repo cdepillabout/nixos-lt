@@ -94,19 +94,6 @@
 			</div>
     </div>
 
-    <div class="step problem" data-x="-8000" data-y="5000" data-rotate="90" data-scale="5">
-			<div class="centerdiv">
-				<h2>答①</h2>
-				<p style="text-align: center; color: blue;"><strong>file</strong></p>
-				<pre><code class="bash">$ file crackme</code>
-crackme: ELF 64-bit LSB <b class="scaling">executable</b> x86-64,
-version 1 (SYSV), dynamically linked (uses
-shared libs), for GNU/Linux 2.6.26, not
-stripped
-<code class="bash">$</code></pre>
-			</div>
-    </div>
-
     <div class="step problem wide" data-x="3500" data-y="0">
 			<div class="centerdiv">
 				<h2>テストレポジトリを作成</h2>
@@ -146,7 +133,7 @@ $ <code class="bash">cat .git/objects/54/b450dd7d7c82*</code>
 			<div class="centerdiv">
 				<h2>前回の復習②</h2>
 				<pre>$ <code class="bash">tree .git/</code>
-<span class="directoryblue">.git</span>/
+<div style="font-size: 32px; line-height: 120%;"><span class="directoryblue">.git</span>/
 ├── HEAD  <span class="linkyellow" >( -&gt; refs/heads/master )</span>
 ├── <span class="directoryblue">objects</span>/
 │   ├── <span class="directoryblue">54</span>/
@@ -156,8 +143,8 @@ $ <code class="bash">cat .git/objects/54/b450dd7d7c82*</code>
 │       └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
 └── <span class="directoryblue">refs</span>/
     ├── <span class="directoryblue">heads</span>/
-    │   └── master  <span class="linkyellow" >( -&gt; objects/56/b450dd7d7c82800... )</span>
-    └── <span class="directoryblue">tags</span>/</pre>
+    │   └── master  <span class="linkyellow" >( -&gt; objects/54/b450dd7d7c82800... )</span>
+    └── <span class="directoryblue">tags</span>/</div></pre>
 			</div>
     </div>
 
@@ -192,7 +179,7 @@ ref: refs/heads/master</pre>
 
     <div class="step problem" data-x="12500" data-y="500">
 			<div class="centerdiv">
-				<h2>二回目のコミット：HEAD</h2>
+				<h2>二番目のコミット：HEAD</h2>
 				<pre>$ <code class="bash">cat .git/HEAD</code>
 ref: refs/heads/master</pre>
 			</div>
@@ -214,7 +201,7 @@ ref: refs/heads/master</pre>
 
     <div class="step problem" data-x="14000" data-y="500">
 			<div class="centerdiv">
-				<h2>二回目のコミット：<br/>masterブランチ</h2>
+				<h2>二番目のコミット：<br/>masterブランチ</h2>
 				<pre>$ <code class="bash">cat .git/refs/heads/master</code>
 ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
 			</div>
@@ -222,7 +209,7 @@ ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
 
     <div class="step problem" data-x="14000" data-y="1000">
 			<div class="centerdiv">
-				<h3>コミットをするたびに、masterブランチが参照しているコミットが変わらない</h3>
+				<h3>コミットをするたびに、masterブランチが参照しているコミットが変わる</h3>
 			</div>
 		</div>
 
