@@ -372,19 +372,92 @@ $ <code class="bash">git commit -m "Second child commit."</code>
 			</div>
 		</div>
 
-    <div class="step problem title" data-x="20500" data-y="3200">
+    <div class="step problem title" data-x="20500" data-y="8000">
 			<div class="centerdiv">
 				<h2>.gitで確認④</h2>
 				<pre>$ <code class="bash">cat .git/refs/heads/newbranch</code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3
 $ <code class="bash">cat .git/refs/heads/master</code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
-$ <code class="bash">cat TODO!!!!!!!!!!!.git/refs/heads/newbranch</code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
+22c395616a88b1e845057ad2775399a1853d4010</pre>
 				<ul>
 					<li>.git/refs/heads/newbranchが作られた</li>
 					<li>masterと同じコミットを参照している</li>
 				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="22000" data-y="0">
+			<div class="centerdiv">
+				<h2>新しいブランチを使ってみよう！</h2>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="23500" data-y="0">
+			<div class="centerdiv">
+				<h2>git checkout</h2>
+				<pre>$ <code class="bash">git checkout newbranch</code>
+Switched to branch 'newbranch'
+$ <code class="bash">cat .git/HEAD</code>
+ref: refs/heads/newbranch
+$ <code class="bash">cat .git/refs/heads/newbranch</code>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3
+$ <code class="bash">cat .git/refs/heads/master</code>
+22c395616a88b1e845057ad2775399a1853d4010
+</pre>
+				<ul>
+					<li>HEADがnewbranchを参照するようになった</li>
+					<li>masterは特に変わっていない</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="23500" data-y="1000">
+			<div class="centerdiv">
+				<h2>newbranchにコミット</h2>
+				<pre>$ <code class="bash">echo testtest &gt;&gt; README</code>
+$ <code class="bash">git add README</code>
+$ <code class="bash">git commit -m "Commit on newbranch."</code>
+[newbranch 163e533] Commit on newbranch.
+ 1 file changed, 1 insertion(+)</pre>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="23500" data-y="2000">
+			<div class="centerdiv">
+				<h2>.git/で確認</h2>
+				<pre>$ <code class="bash">cat .git/HEAD</code>
+ref: refs/heads/newbranch
+$ <code class="bash">cat .git/refs/heads/newbranch</code>
+<b>163e533db99cf9c8bc1f30222e47975840ae2883</b>
+$ <code class="bash">cat .git/refs/heads/master</code>
+22c395616a88b1e845057ad2775399a1853d4010</pre>
+				<ul>
+					<li>newbranchは新しいコミットを参照している</li>
+					<li>master、HEADは特に変わっていない</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="23500" data-y="3000">
+			<div class="centerdiv">
+				<h2>git checkout</h2>
+				<ul>
+					<li>HEADが参照しているブランチを変えられる</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="23500" data-y="4000">
+			<div class="centerdiv">
+				<h2>ちなみに</h2>
+				<p>ブランチだけじゃなくて任意のコミットをcheckoutすることもできる</p>
+				<pre>$ <code class="bash">git checkout 54b450dd</code>
+Note: checking out '54b450dd'.
+
+You are in 'detached HEAD' state.
+...
+$ <code class="bash">cat .git/HEAD</code>
+54b450dd7d7c8280040569fc7b5e4637883e76c2</pre>
 			</div>
 		</div>
 
