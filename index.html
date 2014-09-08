@@ -473,6 +473,76 @@ $ <code class="bash">cat .git/HEAD</code>
 			</div>
 		</div>
 
+    <div class="step problem title" data-x="28000" data-y="0">
+			<div class="centerdiv">
+				<h2>新しいブランチ作成</h2>
+				<pre>$ <code class="bash">git branch test</code>
+$ <code class="bash">cat .git/HEAD</code>
+ref: refs/heads/newbranch
+$ <code class="bash">cat .git/refs/heads/newbranch</code>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3
+$ <code class="bash">cat .git/refs/heads/master</code>
+22c395616a88b1e845057ad2775399a1853d4010
+$ <code class="bash"><b>cat .git/refs/heads/test</b></code>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3
+</pre>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="28000" data-y="1000">
+			<div class="centerdiv">
+				<h2>checkout</h2>
+				<pre>$ <code class="bash">git checkout test</code>
+Switched to branch 'test'
+$ <code class="bash">cat .git/HEAD</code>
+<b>ref: refs/heads/test</b>
+$ <code class="bash">cat .git/refs/heads/newbranch</code>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3
+$ <code class="bash">cat .git/refs/heads/test</code>
+ac0797189547f3f0cdcf39cb170b16d2344aeaf3
+</pre>
+				<ul>
+					<li>HEADがtestを参照するようになった</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="28000" data-y="2000">
+			<div class="centerdiv">
+				<h2>masterが参照しているコミットに、testを参照させる</h2>
+			</div>
+    </div>
+
+    <div class="step problem title" data-x="28000" data-y="3000">
+			<div class="centerdiv">
+				<h2>checkout</h2>
+				<pre>$ <code class="bash">git reset --hard test</code>
+HEAD is now at 22c3956 Second child commit.
+$ <code class="bash">cat .git/HEAD</code>
+ref: refs/heads/test
+$ <code class="bash">cat .git/refs/heads/test</code>
+<b>22c395616a88b1e845057ad2775399a1853d4010</b>
+$ <code class="bash">cat .git/refs/heads/master</code>
+22c395616a88b1e845057ad2775399a1853d4010
+</pre>
+				<ul>
+					<li>testも22c395616を参照している</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="28000" data-y="4000">
+			<div class="centerdiv">
+				<h2>resetのフラグ</h2>
+				<ul>
+					<li>--soft</li>
+					<li>--mixed</li>
+					<li>--hard</li>
+					<li>...</li>
+				</ul>
+			</div>
+    </div>
+
 		<!--
     <div class="step title" data-x="6000" data-y="0">
 			<div class="centerdiv">
