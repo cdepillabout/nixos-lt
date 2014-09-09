@@ -574,6 +574,84 @@ $ <code class="bash">cat .git/refs/heads/master</code>
 			</div>
     </div>
 
+    <div class="step problem title" data-x="37000" data-y="0">
+			<div class="centerdiv">
+				<h2>まずレポジトリーを整理</h2>
+			</div>
+    </div>
+
+    <div class="step problem title" data-x="37000" data-y="600">
+			<div class="centerdiv">
+				<pre>$ <code class="bash">git checkout master</code>
+Switched to branch 'master'
+$ <code class="bash">git branch -D newbranch</code>
+Deleted branch newbranch (was 163e533).
+$ <code class="bash">git branch -D test</code>
+Deleted branch test (was 22c3956).
+</pre>
+				<ul>
+					<li>newbranchとtestブランチを削除</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="37000" data-y="1600">
+			<div class="centerdiv">
+				<h2>ブランチ削除確認</h2>
+				<pre>$ <code class="bash">tree .git/refs</code>
+<div style="font-size: 32px; line-height: 120%;"><span class="bold"><span class="f4">.git/refs/</span></span>
+├── <span class="bold"><span class="f4">heads</span></span>
+│   └── master
+└── <span class="bold"><span class="f4">tags</span></span></div></pre>
+				<ul>
+					<li>newbranchとtestブランチは.git/refs/から消えている</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="37000" data-y="2600">
+			<div class="centerdiv">
+				<h2>test2ブランチ作成</h2>
+				<pre>$ <code class="bash">git branch test2</code></pre>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="37000" data-y="3600">
+			<div class="centerdiv">
+				<h2>masterにテストコミット</h2>
+				<pre>$ <code class="bash">echo "hello1" &gt;&gt; master-test-file </code>
+$ <code class="bash">git add master-test-file</code>
+$ <code class="bash">git commit -m 'master commit 1'</code>
+[master b27026d] master commit 1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 master-test-file
+$ <code class="bash">echo "hello2" &gt;&gt; master-test-file </code>
+$ <code class="bash">git add master-test-file</code>
+$ <code class="bash">git commit -m 'master commit 2'</code>
+[master 55970ec] master commit 2
+ 1 file changed, 1 insertion(+)</pre>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="37000" data-y="4600">
+			<div class="centerdiv">
+				<h2>test2にテストコミット</h2>
+				<pre>$ <code class="bash">git checkout test2</code>
+Switched to branch 'test2'
+$ <code class="bash">echo "foo1" &gt;&gt; test2-test-file </code>
+$ <code class="bash">git add test2-test-file</code>
+$ <code class="bash">git commit -m 'test2 commit 1'</code>
+[test2 491b512] test2 commit 1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test2-test-file
+$ <code class="bash">echo "foo2" &gt;&gt; test2-test-file </code>
+$ <code class="bash">git add test2-test-file</code>
+$ <code class="bash">git commit -m 'test2 commit 2'</code>
+[test2 e43ab74] test2 commit 2
+ 1 file changed, 1 insertion(+)</pre>
+			</div>
+		</div>
+
 		<!--
     <div class="step title" data-x="6000" data-y="0">
 			<div class="centerdiv">
