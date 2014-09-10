@@ -20,8 +20,6 @@
 	<link rel="stylesheet" href="css/highlight-default.min.css">
 	<script src="js/highlight.min.js"></script>
 	<script src="js/jquery.min.js"></script>
-	<!--<script src="js/murmurhash.js"></script>-->
-	<!--<script src="js/mystuff.js"></script>-->
 	<script>hljs.initHighlightingOnLoad();</script>
 
 	<script>
@@ -649,6 +647,60 @@ $ <code class="bash">git add test2-test-file</code>
 $ <code class="bash">git commit -m 'test2 commit 2'</code>
 [test2 e43ab74] test2 commit 2
  1 file changed, 1 insertion(+)</pre>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="37000" data-y="5600">
+			<div class="centerdiv">
+				<h2>rebase</h2>
+				<pre>$ <code class="bash"><b>git rebase master</b></code>
+First, rewinding head...
+Applying: test2 commit 1
+Applying: test2 commit 2
+$ <code class="bash">ls</code>
+master-test-file  README  test2-test-file
+$ <code class="bash">git log --oneline</code>
+<span class="f3">dc2421d</span> test2 commit 2
+<span class="f3">910a5a7</span> test2 commit 1
+<span class="f3">55970ec</span> master commit 2
+<span class="f3">b27026d</span> master commit 1
+<span class="f3">22c3956</span> Second child commit.
+<span class="f3">ac07971</span> Child commit.
+<span class="f3">54b450d</span> Initial commit.</pre>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="37000" data-y="6600">
+			<div class="centerdiv">
+				<h2>コミットハッシュを注目</h2>
+				<pre>$ <code class="bash">git log --oneline</code>
+<b><span class="f3">dc2421d</span></b> test2 commit 2
+<b><span class="f3">910a5a7</span></b> test2 commit 1</pre>
+				<ul>
+					<li>コミットが書き換えられている</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="38500" data-y="0">
+			<div class="centerdiv">
+				<h2>レビュー</h2>
+				<dl>
+					<dt><b>git branch</b></dt>
+					<dd style="margin-left: 100px;">新しいブランチを作成</dd>
+					<dt><b>git checkout</b></dt>
+					<dd style="margin-left: 100px;">HEADが参照しているブランチを変更</dd>
+					<dt><b>git reset</b></dt>
+					<dd style="margin-left: 100px;">現在のブランチが参照しているコミットを変更</dd>
+					<dt><b>git rebase</b></dt>
+					<dd style="margin-left: 100px;">ブランチごとを移住</dd>
+				</dl>
+			</div>
+		</div>
+
+    <div class="step problem title" data-x="40000" data-y="0">
+			<div class="centerdiv">
+				<p>fin</p>
 			</div>
 		</div>
 
