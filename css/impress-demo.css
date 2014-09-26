@@ -336,6 +336,15 @@ a:focus {
 	margin-top: 10px;
 }
 
+.emphasize {
+	font-size: 36px;
+	font-weight: bold;
+	color: #AAAAFF;
+}
+
+.noemphasize {
+}
+
 .directoryblue {
 	color: #8888FF;
 }

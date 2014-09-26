@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=1024" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<title>Git Study Session</title>
+	<title>Shell Shock -- Bash脆弱性</title>
 
 	<meta name="author" content="Dennis Gosnell" />
 
@@ -63,215 +63,297 @@
 
     <div class="step slide title" data-x="0" data-y="0">
 			<div class="centerdiv-in-slide">
-        <h1>Git Internals</h1>
-        <h3 style="margin-top: 40px;">コミットとブランチ編</h3>
+        <h1>Shell Shock</h1>
+        <h3 style="margin-top: 40px;">Bashの脆弱性</h3>
 				<p style="margin-top: 70px;"><a href="https://github.com/cdepillabout">Dennis Gosnell</a></p>
 				<p style="margin-top: 70px;"><small style="font-size: 24px;">
-					<a href="http://cdepillabout.github.io/git-internals-presentation/index.html">this presentation online</a>
+					<a href="http://cdepillabout.github.io/bash-vuln-shell-shock-lt/index.html">this presentation online</a>
 				</small</p>
 			</div>
     </div>
 
-    <div class="step slide title" data-x="1000" data-y="0">
-				<h3>親コミットと子コミットの話</h3>
-				<div style="margin-top: 30px; position: relative; display: inline-block;">
-					<img style="" src="img/commitgraph.png"></img>
-					<div style="width: 12%; height: 50%; top: 10%; border: 10px solid blue; position: absolute; z-index: 10;"></div>
-				</div>
-				<p style="margin-top: 30px; line-height: 50px; font-size: 40px;"><em>コミットとコミット</em>の関係と、<em>ブランチとコミット</em>の関係を詳しく調べます。</p>
+    <!-- <div class="step slide title" data-x="1000" data-y="0"> -->
+				<!-- <h3>親コミットと子コミットの話</h3> -->
+				<!-- <div style="margin-top: 30px; position: relative; display: inline-block;"> -->
+					<!-- <img style="" src="img/commitgraph.png"></img> -->
+					<!-- <div style="width: 12%; height: 50%; top: 10%; border: 10px solid blue; position: absolute; z-index: 10;"></div> -->
+				<!-- </div> -->
+				<!-- <p style="margin-top: 30px; line-height: 50px; font-size: 40px;"><em>コミットとコミット</em>の関係と、<em>ブランチとコミット</em>の関係を詳しく調べます。</p> -->
+    <!-- </div> -->
+
+    <!-- <div class="step slide title" data-x="2000" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>今日話すこと</h2> -->
+				<!-- <ul> -->
+					<!-- <li><pre><code class="bash">git branch</code></pre></li> -->
+					<!-- <li><pre><code class="bash">git checkout</code></pre></li> -->
+					<!-- <li><pre><code class="bash">git reset</code></pre></li> -->
+					<!-- <li><pre><code class="bash">git merge</code></pre></li> -->
+					<!-- <li><pre><code class="bash">git rebase</code></pre></li> -->
+			<!-- </div> -->
+    <!-- </div> -->
+
+    <div class="step problem very" data-x="2000" data-y="0">
+			<div class="centerdiv">
+				<h2>脆弱性</h2>
+				<pre>$ <code class="bash">x='() { :;}; echo vulnerable' /bin/bash -c /bin/true</code>
+vulnerable</pre>
+			</div>
     </div>
 
-    <div class="step slide title" data-x="2000" data-y="0">
+    <div class="step problem" data-x="4000" data-y="0">
 			<div class="centerdiv">
-				<h2>今日話すこと</h2>
+				<h2>詳しい説明</h2>
+			</div>
+    </div>
+
+    <div class="step problem title verywide" data-x="6000" data-y="0">
+			<div class="centerdiv">
+				<h2>bashでコマンドを実行</h2>
+				<pre>$ x='() { :;}; echo vulnerable' <span class="emphasize">/bin/bash -c /bin/true</span>
+vulnerable</pre>
 				<ul>
-					<li><pre><code class="bash">git branch</code></pre></li>
-					<li><pre><code class="bash">git checkout</code></pre></li>
-					<li><pre><code class="bash">git reset</code></pre></li>
-					<li><pre><code class="bash">git merge</code></pre></li>
-					<li><pre><code class="bash">git rebase</code></pre></li>
-			</div>
-    </div>
-
-    <div class="step problem wide" data-x="3500" data-y="0">
-			<div class="centerdiv">
-				<h2>テストレポジトリを作成</h2>
-				<pre>$ <code class="bash">mkdir testrepo &amp;&amp; cd testrepo</code>
-$ <code class="bash">git init .</code>
-Initialized empty Git repository in ~/testrepo/.git/
-$ <code class="bash">git config user.name "Test User"</code>
-$ <code class="bash">git config user.email "testuser@example.com"</code></pre>
-			</div>
-    </div>
-
-    <div class="step problem" data-x="5000" data-y="0">
-			<div class="centerdiv">
-				<h2>テストコミット</h2>
-				<pre>$ <code class="bash">touch README</code>
-$ <code class="bash">git add .</code>
-$ <code class="bash">git commit -m "Initial commit."</code>
-[master (root-com) 54b450] Initial commit.
- 0 files changed
-  create mode 100644 README</pre>
-			</div>
-    </div>
-
-    <div class="step problem" data-x="6500" data-y="0">
-			<div class="centerdiv">
-				<h2>前回の復習①</h2>
-				<pre>$ <code class="bash">cat .git/HEAD</code>
-ref: refs/heads/master
-$ <code class="bash">cat .git/refs/heads/master</code>
-54b450dd7d7c8280040569fc7b5e4637883e76c2
-$ <code class="bash">cat .git/objects/54/b450dd7d7c82*</code>
-...</pre>
-			</div>
-    </div>
-
-    <div class="step problem wide" data-x="8000" data-y="0">
-			<div class="centerdiv">
-				<h2>前回の復習②</h2>
-				<pre>$ <code class="bash">tree .git/</code>
-<div style="font-size: 32px; line-height: 120%;"><span class="directoryblue">.git</span>/
-├── HEAD  <span class="linkyellow" >( -&gt; refs/heads/master )</span>
-├── <span class="directoryblue">objects</span>/
-│   ├── <span class="directoryblue">54</span>/
-│   │   ├── 3b9bebdc6bd5c4b22136034a95dd097a57d3dd
-│   │   └── b450dd7d7c8280040569fc7b5e4637883e76c2
-│   └── <span class="directoryblue">e6</span>/
-│       └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
-└── <span class="directoryblue">refs</span>/
-    ├── <span class="directoryblue">heads</span>/
-    │   └── master  <span class="linkyellow" >( -&gt; objects/54/b450dd7d7c82800... )</span>
-    └── <span class="directoryblue">tags</span>/</div></pre>
-			</div>
-    </div>
-
-    <div class="step problem" data-x="9500" data-y="0">
-			<div class="centerdiv">
-				<h2>子コミット</h2>
-				<pre>$ <code class="bash">echo "hogehoge" &gt;&gt; README</code>
-$ <code class="bash">git add README</code>
-$ <code class="bash">git commit -m "Child commit."</code>
-[master ac07971] Child commit.
- 1 file changed, 1 insertion(+)</pre>
-			</div>
-    </div>
-
-    <div class="step problem" data-x="11000" data-y="0">
-			<div class="centerdiv">
-				<div style="background: white; margin-bottom: 50px;">
-					<p>.git/HEAD</p>
-					<p>.git/refs/heads/master</p>
-				</div>
-				<h2>どう変わった？</h2>
-			</div>
-		</div>
-
-    <div class="step problem" data-x="12500" data-y="0">
-			<div class="centerdiv">
-				<h2>最初のコミット：HEAD</h2>
-				<pre>$ <code class="bash">cat .git/HEAD</code>
-ref: refs/heads/master</pre>
-			</div>
-		</div>
-
-    <div class="step problem" data-x="12500" data-y="500">
-			<div class="centerdiv">
-				<h2>二番目のコミット：HEAD</h2>
-				<pre>$ <code class="bash">cat .git/HEAD</code>
-ref: refs/heads/master</pre>
-			</div>
-		</div>
-
-    <div class="step problem" data-x="12500" data-y="1000">
-			<div class="centerdiv">
-				<h3>コミットを何回しても、HEADが参照しているブランチが変わらない</h3>
-			</div>
-		</div>
-
-    <div class="step problem" data-x="14000" data-y="0">
-			<div class="centerdiv">
-				<h2>最初のコミット：<br/>masterブランチ</h2>
-				<pre>$ <code class="bash">cat .git/refs/heads/master</code>
-54b450dd7d7c8280040569fc7b5e4637883e76c2</pre>
-			</div>
-		</div>
-
-    <div class="step problem" data-x="14000" data-y="500">
-			<div class="centerdiv">
-				<h2>二番目のコミット：<br/>masterブランチ</h2>
-				<pre>$ <code class="bash">cat .git/refs/heads/master</code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
-			</div>
-		</div>
-
-    <div class="step problem" data-x="14000" data-y="1000">
-			<div class="centerdiv">
-				<h3>コミットをするたびに、masterブランチが参照しているコミットが変わる</h3>
-			</div>
-		</div>
-
-    <div class="step problem wide" data-x="15500" data-y="0">
-			<div class="centerdiv">
-				<h2>親コミット <span style="font-size: 60px;">and</span> 子コミット</h2>
-				<pre>$ <code class="bash">git log --pretty=raw</code>
-commit: ac07971895
-<span class="directoryblue">parent: 54b450dd7d</span>
-author: &lt;testuser@example.com&gt; Jul 13 14:51:49
-
-    Child commit.
-
-commit: 54b450dd7d
-author: &lt;testuser@example.com&gt; Jul 8 18:36:36
-
-    Initial commit.</pre>
-			</div>
-		</div>
-
-    <div class="step problem" data-x="15500" data-y="500">
-			<div class="centerdiv">
-				<h3>子コミットが親コミットを参照している</h3>
-			</div>
-		</div>
-
-    <div class="step problem" data-x="17500" data-y="0">
-			<div class="centerdiv">
-				<h2>コマンド紹介</h2>
-			</div>
-		</div>
-
-    <div class="step problem" data-x="19000" data-y="0">
-			<div class="centerdiv">
-				<h2>git branch</h2>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="20500" data-y="0">
-			<div class="centerdiv">
-				<h2>全部のブランチを表示</h2>
-				<pre>$ <code class="bash">git branch --verbose --all</code>
-* <span style="color: green;">master</span> ac07971 Child commit.</pre>
-				<ul>
-					<li>masterブランチしかない</li>
-					<li>コミットハッシュとコミットメッセージも見れる</li>
+					<li>bashでコマンドを実行する</li>
 				</ul>
+				例：
+				<pre>$ <span class="emphasize">/bin/bash -c "/bin/echo hello"</span>
+hello</pre>
 			</div>
-		</div>
+    </div>
 
-    <div class="step problem title" data-x="20500" data-y="700">
+    <div class="step problem title verywide" data-x="8000" data-y="0">
 			<div class="centerdiv">
-				<h2>ブランチ追加</h2>
-				<pre>$ <code class="bash">git branch newbranch</code>
-$ <code class="bash">git branch --verbose --all</code>
-* <span style="color: green;">master</span>     ac07971  Child commit.
-  newbranch  ac07971  Child commit.</pre>
+				<h2>環境変数</h2>
+				<pre>$ <span class="emphasize">x='() { :;}; echo vulnerable'</span> /bin/bash -c /bin/true
+vulnerable</pre>
 				<ul>
-					<li>newbranchが作られた</li>
-					<li>masterと同じコミットを参照している</li>
+					<li>bashが実行されたとき、環境変数を評価して実行されているコマンド(/bin/true)に渡す</li>
 				</ul>
+				例：
+				<pre>$ <span class="emphasize">x='foobar'</span> /bin/bash -c "echo $foobar"
+foobar</pre>
 			</div>
-		</div>
+    </div>
+
+    <div class="step problem title verywide" data-x="10000" data-y="0">
+			<div class="centerdiv">
+				<h2>環境変数で関数を定義</h2>
+				<ul>
+					<li>関数を定義して環境にエクスポート</li>
+				</ul>
+				<pre>$ <span class="emphasize">my_func () { echo "hello"; }</span>
+$ my_func
+hello
+$ env | grep -i my_func
+$ bash -c "my_func"
+bash: my_func: command not found
+$ <span class="emphasize">export -f my_func</span>
+$ env | grep -i my_func
+my_func=() { echo "hello"; }
+$ bash -c "my_func"
+hello</pre>
+			</div>
+    </div>
+
+    <div class="step problem title verywide" data-x="12000" data-y="0">
+			<div class="centerdiv">
+				<h2>bashのnop</h2>
+				<pre>$ x='() { <span class="emphasize">:</span>;}; echo vulnerable' /bin/bash -c /bin/true
+vulnerable</pre>
+				<ul>
+					<li>:はbashのnopオペレーター</li>
+					<li>以下のコマンドと関数は何もしない</li>
+				</ul>
+				<pre>$ :
+$ <span class="emphasize">my_func () { : ;}</span>
+$ my_func
+$</pre>
+			</div>
+    </div>
+
+    <div class="step problem title verywide" data-x="14000" data-y="0">
+			<div class="centerdiv">
+				<h2>bashの挙動</h2>
+				<ul>
+					<li>実行時に関数っぽい環境変数を探して、見つかったら評価する</li>
+				</ul>
+				<pre>$ my_func () { echo "hello"; }
+$ <span class="emphasize">export -f my_func</span>
+$ env | grep -i my_func
+<span class="emphasize">my_func=() { echo "hello"; }</span>
+$ bash -c "my_func"
+hello</pre>
+			</div>
+    </div>
+
+    <div class="step problem title verywide" data-x="16000" data-y="0">
+			<div class="centerdiv">
+				<h2>脆弱性</h2>
+				<ul>
+					<li>環境に何もしない関数を作って、関数の定義の後で任意のコマンドを入れる</li>
+					<li>bashが起動するとき、関数を評価して、関数の定義の後の任意のコマンドも実行しちゃう</li>
+				</ul>
+				<pre>$ x='() { :;}; <span class="emphasize">echo vulnerable</span>' /bin/bash -c /bin/true
+vulnerable</pre>
+			</div>
+    </div>
+
+    <!-- <div class="step problem" data-x="6500" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>前回の復習①</h2> -->
+				<!-- <pre>$ <code class="bash">cat .git/HEAD</code> -->
+<!-- ref: refs/heads/master -->
+<!-- $ <code class="bash">cat .git/refs/heads/master</code> -->
+<!-- 54b450dd7d7c8280040569fc7b5e4637883e76c2 -->
+<!-- $ <code class="bash">cat .git/objects/54/b450dd7d7c82*</code> -->
+<!-- ...</pre> -->
+			<!-- </div> -->
+    <!-- </div> -->
+
+    <!-- <div class="step problem wide" data-x="8000" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>前回の復習②</h2> -->
+				<!-- <pre>$ <code class="bash">tree .git/</code> -->
+<!-- <div style="font-size: 32px; line-height: 120%;"><span class="directoryblue">.git</span>/ -->
+<!-- ├── HEAD  <span class="linkyellow" >( -&gt; refs/heads/master )</span> -->
+<!-- ├── <span class="directoryblue">objects</span>/ -->
+<!-- │   ├── <span class="directoryblue">54</span>/ -->
+<!-- │   │   ├── 3b9bebdc6bd5c4b22136034a95dd097a57d3dd -->
+<!-- │   │   └── b450dd7d7c8280040569fc7b5e4637883e76c2 -->
+<!-- │   └── <span class="directoryblue">e6</span>/ -->
+<!-- │       └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391 -->
+<!-- └── <span class="directoryblue">refs</span>/ -->
+ <!--    ├── <span class="directoryblue">heads</span>/ -->
+ <!--    │   └── master  <span class="linkyellow" >( -&gt; objects/54/b450dd7d7c82800... )</span> -->
+ <!--    └── <span class="directoryblue">tags</span>/</div></pre> -->
+			<!-- </div> -->
+    <!-- </div> -->
+
+    <!-- <div class="step problem" data-x="9500" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>子コミット</h2> -->
+				<!-- <pre>$ <code class="bash">echo "hogehoge" &gt;&gt; README</code> -->
+<!-- $ <code class="bash">git add README</code> -->
+<!-- $ <code class="bash">git commit -m "Child commit."</code> -->
+<!-- [master ac07971] Child commit. -->
+ <!-- 1 file changed, 1 insertion(+)</pre> -->
+			<!-- </div> -->
+    <!-- </div> -->
+
+    <!-- <div class="step problem" data-x="11000" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <div style="background: white; margin-bottom: 50px;"> -->
+					<!-- <p>.git/HEAD</p> -->
+					<!-- <p>.git/refs/heads/master</p> -->
+				<!-- </div> -->
+				<!-- <h2>どう変わった？</h2> -->
+			<!-- </div> -->
+		<!-- </div> -->
+
+    <!-- <div class="step problem" data-x="12500" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>最初のコミット：HEAD</h2> -->
+				<!-- <pre>$ <code class="bash">cat .git/HEAD</code> -->
+<!-- ref: refs/heads/master</pre> -->
+			<!-- </div> -->
+		<!-- </div> -->
+
+    <!-- <div class="step problem" data-x="12500" data-y="500"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>二番目のコミット：HEAD</h2> -->
+				<!-- <pre>$ <code class="bash">cat .git/HEAD</code> -->
+<!-- ref: refs/heads/master</pre> -->
+			<!-- </div> -->
+		<!-- </div> -->
+
+    <!-- <div class="step problem" data-x="12500" data-y="1000"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h3>コミットを何回しても、HEADが参照しているブランチが変わらない</h3> -->
+			<!-- </div> -->
+		<!-- </div> -->
+
+    <!-- <div class="step problem" data-x="14000" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>最初のコミット：<br/>masterブランチ</h2> -->
+				<!-- <pre>$ <code class="bash">cat .git/refs/heads/master</code> -->
+<!-- 54b450dd7d7c8280040569fc7b5e4637883e76c2</pre> -->
+			<!-- </div> -->
+		<!-- </div> -->
+
+    <!-- <div class="step problem" data-x="14000" data-y="500"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>二番目のコミット：<br/>masterブランチ</h2> -->
+				<!-- <pre>$ <code class="bash">cat .git/refs/heads/master</code> -->
+<!-- ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre> -->
+			<!-- </div> -->
+		<!-- </div> -->
+
+    <!-- <div class="step problem" data-x="14000" data-y="1000"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h3>コミットをするたびに、masterブランチが参照しているコミットが変わる</h3> -->
+			<!-- </div> -->
+		<!-- </div> -->
+
+    <!-- <div class="step problem wide" data-x="15500" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>親コミット <span style="font-size: 60px;">and</span> 子コミット</h2> -->
+				<!-- <pre>$ <code class="bash">git log --pretty=raw</code> -->
+<!-- commit: ac07971895 -->
+<!-- <span class="directoryblue">parent: 54b450dd7d</span> -->
+<!-- author: &lt;testuser@example.com&gt; Jul 13 14:51:49 -->
+
+    <!-- Child commit. -->
+
+<!-- commit: 54b450dd7d -->
+<!-- author: &lt;testuser@example.com&gt; Jul 8 18:36:36 -->
+
+    <!-- Initial commit.</pre> -->
+			<!-- </div> -->
+		<!-- </div> -->
+
+    <!-- <div class="step problem" data-x="15500" data-y="500"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h3>子コミットが親コミットを参照している</h3> -->
+			<!-- </div> -->
+		<!-- </div> -->
+
+    <!-- <div class="step problem" data-x="17500" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>コマンド紹介</h2> -->
+			<!-- </div> -->
+		<!-- </div> -->
+
+    <!-- <div class="step problem" data-x="19000" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>git branch</h2> -->
+			<!-- </div> -->
+		<!-- </div> -->
+
+    <!-- <div class="step problem title" data-x="20500" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>全部のブランチを表示</h2> -->
+				<!-- <pre>$ <code class="bash">git branch --verbose --all</code> -->
+<!-- * <span style="color: green;">master</span> ac07971 Child commit.</pre> -->
+				<!-- <ul> -->
+					<!-- <li>masterブランチしかない</li> -->
+					<!-- <li>コミットハッシュとコミットメッセージも見れる</li> -->
+				<!-- </ul> -->
+			<!-- </div> -->
+		<!-- </div> -->
+
+    <!-- <div class="step problem title" data-x="20500" data-y="700"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>ブランチ追加</h2> -->
+				<!-- <pre>$ <code class="bash">git branch newbranch</code> -->
+<!-- $ <code class="bash">git branch --verbose --all</code> -->
+<!-- * <span style="color: green;">master</span>     ac07971  Child commit. -->
+  <!-- newbranch  ac07971  Child commit.</pre> -->
+				<!-- <ul> -->
+					<!-- <li>newbranchが作られた</li> -->
+					<!-- <li>masterと同じコミットを参照している</li> -->
+				<!-- </ul> -->
+			<!-- </div> -->
+		<!-- </div> -->
 
     <div class="step problem title" data-x="20500" data-y="1600">
 			<div class="centerdiv">
