@@ -1,6 +1,6 @@
-Bloom Filter LT
+NixOS LT
 ===============
 
-LT introducing bloom filters.
+LT introducing NixOS.
 
-[view online](http://cdepillabout.github.io/bloom-filter-lt/index.html)
+[view online](http://cdepillabout.github.io/nixos-lt/index.html)
