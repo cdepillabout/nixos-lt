@@ -53,13 +53,14 @@
 			</div>
     </div>
 
-    <div class="step problem verywide" data-x="2000" data-y="0">
+    <div class="step problem wide" data-x="2000" data-y="0">
 			<div class="centerdiv">
 				<h2>NixOSとは</h2>
 				<ul>
 					<li>普通のLinuxディストリビューション</li>
-					<li>Debian系とかRedhat系ではない（独特のディストリビューション）</li>
-					<li>もともと研究用だった</li>
+					<li>Debian系とかRedhat系ではない</li>
+					<li>独自のディストリビューション</li>
+					<li>もともと研究用のOS</li>
 				</ul>
 			</div>
     </div>
@@ -73,6 +74,41 @@
 			</div>
     </div>
 
+    <div class="step problem" data-x="6000" data-y="0">
+			<div class="centerdiv">
+				<h2>関数型パッケージマネジャーとは？</h2>
+				<ul>
+					<li>パッケージを一回入れたら絶対削除されない</li>
+				</ul>
+			</div>
+    </div>
+
+    <div class="step problem wide" data-x="8000" data-y="0">
+			<div class="centerdiv">
+				<h2>え？</h2>
+				<p>パッケージ更新したら古い方のパッケージは実質削除されるんじゃない？</p>
+			</div>
+    </div>
+
+    <div class="step problem wide" data-x="10000" data-y="0">
+			<div class="centerdiv">
+				<h2>例えば</h2>
+				<ul>
+					<li>java-1.6を/usr/bin/javaとしてインストール</li>
+					<li>java-1.7にアップグレードしたら/usr/bin/javaが更新される</li>
+					<li>java-1.6に依存しているソフトが動かなくなる</li>
+				</ul>
+			</div>
+    </div>
+
+    <div class="step problem wide" data-x="12000" data-y="0">
+			<div class="centerdiv">
+				<h2>NixOS</h2>
+				<p style="text-align: center;">この問題を回避できる</p>
+			</div>
+    </div>
+
+		<!--
     <div class="step problem title verywide" data-x="6000" data-y="0">
 			<div class="centerdiv">
 				<h2>bashでコマンドを実行</h2>
@@ -163,6 +199,7 @@ hello</pre>
 vulnerable</pre>
 			</div>
     </div>
+		-->
 
     <!-- <div class="step problem" data-x="6500" data-y="0"> -->
 			<!-- <div class="centerdiv"> -->

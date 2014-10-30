@@ -336,6 +336,12 @@ a:focus {
 	margin-top: 10px;
 }
 
+.problem ul {
+    list-style: disc outside none;
+	margin-left: 30px;
+	margin-top: 50px;
+}
+
 .emphasize {
 	font-size: 36px;
 	font-weight: bold;
