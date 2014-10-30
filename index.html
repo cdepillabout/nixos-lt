@@ -94,9 +94,9 @@
 			<div class="centerdiv">
 				<h2>例えば</h2>
 				<ul>
-					<li>java-1.6を/usr/bin/javaとしてインストール</li>
-					<li>java-1.7にアップグレードしたら/usr/bin/javaが更新される</li>
-					<li>java-1.6に依存しているソフトが動かなくなる</li>
+					<li>java-1.7を/usr/bin/javaとしてインストール</li>
+					<li>java-1.8にアップグレードしたら/usr/bin/javaが更新される</li>
+					<li>java-1.7に依存しているソフトが動かなくなる</li>
 				</ul>
 			</div>
     </div>
@@ -107,6 +107,115 @@
 				<p style="text-align: center;">この問題を回避できる</p>
 			</div>
     </div>
+
+    <div class="step problem wide" data-x="14000" data-y="0">
+			<div class="centerdiv">
+				<h2>パッケージをインストール</h2>
+				<p style="text-align: center;">/nix/store/の配下にファイルができる</p>
+				<pre><div style="font-size: 32px; line-height: 110%;"><span class="directoryblue">/nix/store/</span>
+└── <span class="directoryblue">n5qcp6cd3mca903zkqq39vzkbcfig94z-java-1.7/</span>
+    ├── <span class="directoryblue">bin/</span>
+    │   ├── java
+    │   ├── javac
+    │   └── (...)
+    ├── <span class="directoryblue">include/</span>
+    │   └── (...)
+    └── <span class="directoryblue">lib/</span>
+        └── (...)</div></pre>
+			</div>
+    </div>
+
+    <div class="step problem wide" data-x="16000" data-y="0">
+			<div class="centerdiv">
+				<h2>java8をインストール</h2>
+				<p style="text-align: center;">java7は削除されず</p>
+				<pre><div style="font-size: 32px; line-height: 110%;"><span class="directoryblue">/nix/store/</span>
+├── <span class="directoryblue">n5qcp6cd3mca903zkqq39vzkbcfig94z-java-1.7/</span>
+│   └── (...)
+└── <span class="directoryblue">xwz6c4685klixn326baq3dgjj2mp2m0h-java-1.8/</span>
+    ├── <span class="directoryblue">bin/</span>
+    │   ├── java
+    │   ├── javac
+    │   └── (...)
+    └── (...)</div></pre>
+			</div>
+    </div>
+
+    <div class="step problem wide" data-x="18000" data-y="0">
+			<div class="centerdiv">
+				<h2>そのハッシュは？</h2>
+				<pre><div style="font-size: 32px; line-height: 110%;"><span class="directoryblue">/nix/store/</span>
+└── <span class="getattentionred">n5qcp6cd3mca903zkqq39vzkbcfig94z</span><span class="directoryblue">-java-1.7/</span>
+    └── (...)</div></pre>
+			</div>
+    </div>
+
+    <div class="step problem verywide" data-x="20000" data-y="0">
+			<div class="centerdiv">
+				<h2>derivation</h2>
+				<p style="text-align: center;">パッケージの定義ファイル</p>
+				<pre>{ stdenv, fetchurl }:
+stdenv.mkDerivation rec {
+ name = "hello-2.9";
+ src = fetchurl {
+  url = "mirror://gnu/hello/${name}.tar.gz";
+  sha256 = "19qy37gkasc4csb1d3bdiz9snn8mir2p3aj0jgzmfv0r2hi7mfzc"; };
+ meta = {
+  description = "A program that produces a friendly greeting";
+  license = stdenv.lib.licenses.gpl3Plus; };
+}</pre>
+			</div>
+    </div>
+
+    <div class="step problem" data-x="22000" data-y="0">
+			<div class="centerdiv">
+				<h2>NixOSのいいところ</h2>
+				<ul>
+					<li>java-1.7を/usr/bin/javaとしてインストール</li>
+					<li>java-1.8にアップグレードしたら/usr/bin/javaが更新される</li>
+					<li>java-1.7に依存しているソフトが動かなくなる</li>
+				</ul>
+			</div>
+    </div>
+
+    <div class="step problem wide" data-x="32000" data-y="0">
+			<div class="centerdiv">
+				<h2>NixOSでパッケージ<br/>インストール</h2>
+				<p>インストールしたら/nix/store/の配下にディレクトリーができる</p>
+				<pre><div style="font-size: 32px; line-height: 120%;"><span class="directoryblue">/nix/store</span>/
+├── <span class="directoryblue">xwz6c4685klixn326baq3dgjj2mp2m0h-java-1.6</span>/
+├── <span class="directoryblue">objects</span>
+│   ├── <span class="directoryblue">54</span>
+│   │   └── b450dd7d7c
+│   └── <span class="directoryblue">ac</span>
+│       └── 0797189547
+└── <span class="directoryblue">refs</span>
+    └── <span class="directoryblue">heads</span>
+        ├── master
+        └── newbranch</div></pre>
+			</div>
+    </div>
+
+    <div class="step problem title" data-x="20500" data-y="1600">
+			<div class="centerdiv">
+				<h2>.git確認①</h2>
+				<pre>$ <code class="bash">tree .git/</code>
+<div style="font-size: 32px; line-height: 120%;"><span class="directoryblue">.git</span>/
+├── HEAD
+├── <span class="directoryblue">objects</span>
+│   ├── <span class="directoryblue">54</span>
+│   │   └── b450dd7d7c
+│   └── <span class="directoryblue">ac</span>
+│       └── 0797189547
+└── <span class="directoryblue">refs</span>
+    └── <span class="directoryblue">heads</span>
+        ├── master
+        └── newbranch</div></pre>
+				<ul>
+					<li>newbranchが作られた</li>
+				</ul>
+			</div>
+		</div>
 
 		<!--
     <div class="step problem title verywide" data-x="6000" data-y="0">
