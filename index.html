@@ -86,7 +86,7 @@
     <div class="step problem wide" data-x="8000" data-y="0">
 			<div class="centerdiv">
 				<h2>え？</h2>
-				<p>パッケージ更新したら古い方のパッケージは実質削除されるんじゃない？</p>
+				<p>パッケージ更新したら古い方のパッケージは削除されるんじゃない？</p>
 			</div>
     </div>
 
@@ -154,7 +154,7 @@
 			<div class="centerdiv">
 				<h2>derivation</h2>
 				<p style="text-align: center;">パッケージの定義ファイル</p>
-				<pre>{ stdenv, fetchurl }:
+				<pre>{ stdenv, fetchurl, zlib }:
 stdenv.mkDerivation rec {
  name = "hello-2.9";
  src = fetchurl {
@@ -167,55 +167,45 @@ stdenv.mkDerivation rec {
 			</div>
     </div>
 
-    <div class="step problem" data-x="22000" data-y="0">
+    <div class="step problem wide" data-x="22000" data-y="0">
+			<div class="centerdiv">
+				<h2>derivationファイルでハッシュが決まる</h2>
+				<pre><div style="font-size: 32px; line-height: 110%;"><span class="directoryblue">/nix/store/</span>
+├── <span class="getattentionred">hwi70kh40mxmw25h3w9rf3yhcz4rjim0</span><span class="directoryblue">-java-1.7/</span>
+│   └── (...)
+└── <span class="getattentionred">n5qcp6cd3mca903zkqq39vzkbcfig94z</span><span class="directoryblue">-java-1.7/</span>
+    └── (...)</div></pre>
+			</div>
+    </div>
+
+    <div class="step problem" data-x="24000" data-y="0">
 			<div class="centerdiv">
 				<h2>NixOSのいいところ</h2>
 				<ul>
-					<li>java-1.7を/usr/bin/javaとしてインストール</li>
-					<li>java-1.8にアップグレードしたら/usr/bin/javaが更新される</li>
-					<li>java-1.7に依存しているソフトが動かなくなる</li>
+					<li>依存関係を大切にしている</li>
+					<li>パッケージを入れたらずっと使える</li>
+					<li>パッケージ管理がより安全で楽になる</li>
 				</ul>
 			</div>
     </div>
 
-    <div class="step problem wide" data-x="32000" data-y="0">
+    <div class="step problem wide" data-x="26000" data-y="0">
 			<div class="centerdiv">
-				<h2>NixOSでパッケージ<br/>インストール</h2>
-				<p>インストールしたら/nix/store/の配下にディレクトリーができる</p>
-				<pre><div style="font-size: 32px; line-height: 120%;"><span class="directoryblue">/nix/store</span>/
-├── <span class="directoryblue">xwz6c4685klixn326baq3dgjj2mp2m0h-java-1.6</span>/
-├── <span class="directoryblue">objects</span>
-│   ├── <span class="directoryblue">54</span>
-│   │   └── b450dd7d7c
-│   └── <span class="directoryblue">ac</span>
-│       └── 0797189547
-└── <span class="directoryblue">refs</span>
-    └── <span class="directoryblue">heads</span>
-        ├── master
-        └── newbranch</div></pre>
+				<h2>maintainerになりました</h2>
+				<pre>$ <code class="bash">cat nixpkgs/lib/maintainers.nix</code>
+(...)
+<code class="nix"><span style="font-weight: 100; font-size: 80%;">campadrenalin = "Philip Horger &lt;campadrenalin@gmail.com&gt;";</span>
+<span style="font-weight: 900">cdepillabout = "Dennis Gosnell &lt;cdep.illabout@gmail.com&gt;";</span>
+<span style="font-weight: 100; font-size: 80%;">cfouche = "Chaddaï Fouché &lt;chaddai.fouche@gmail.com&gt;";</span></code>
+(...)</pre>
 			</div>
     </div>
 
-    <div class="step problem title" data-x="20500" data-y="1600">
+    <div class="step problem wide" data-x="28000" data-y="0">
 			<div class="centerdiv">
-				<h2>.git確認①</h2>
-				<pre>$ <code class="bash">tree .git/</code>
-<div style="font-size: 32px; line-height: 120%;"><span class="directoryblue">.git</span>/
-├── HEAD
-├── <span class="directoryblue">objects</span>
-│   ├── <span class="directoryblue">54</span>
-│   │   └── b450dd7d7c
-│   └── <span class="directoryblue">ac</span>
-│       └── 0797189547
-└── <span class="directoryblue">refs</span>
-    └── <span class="directoryblue">heads</span>
-        ├── master
-        └── newbranch</div></pre>
-				<ul>
-					<li>newbranchが作られた</li>
-				</ul>
+				<h2>開発で使えないか検討したい</h2>
 			</div>
-		</div>
+    </div>
 
 		<!--
     <div class="step problem title verywide" data-x="6000" data-y="0">
@@ -467,443 +457,6 @@ vulnerable</pre>
 			<!-- </div> -->
 		<!-- </div> -->
 
-    <div class="step problem title" data-x="20500" data-y="1600">
-			<div class="centerdiv">
-				<h2>.git確認①</h2>
-				<pre>$ <code class="bash">tree .git/</code>
-<div style="font-size: 32px; line-height: 120%;"><span class="directoryblue">.git</span>/
-├── HEAD
-├── <span class="directoryblue">objects</span>
-│   ├── <span class="directoryblue">54</span>
-│   │   └── b450dd7d7c
-│   └── <span class="directoryblue">ac</span>
-│       └── 0797189547
-└── <span class="directoryblue">refs</span>
-    └── <span class="directoryblue">heads</span>
-        ├── master
-        └── newbranch</div></pre>
-				<ul>
-					<li>newbranchが作られた</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="20500" data-y="2400">
-			<div class="centerdiv">
-				<h2>.gitで確認②</h2>
-				<pre>$ <code class="bash">cat .git/HEAD</code>
-ref: refs/heads/master
-$ <code class="bash">cat .git/refs/heads/master</code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
-				<ul>
-					<li>HEADはmasterブランチを参照</li>
-					<li>masterはさきの子コミットを参照</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="20500" data-y="3200">
-			<div class="centerdiv">
-				<h2>.gitで確認③</h2>
-				<pre>$ <code class="bash">cat .git/refs/heads/newbranch</code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3</pre>
-				<ul>
-					<li>.git/refs/heads/newbranchが作られた</li>
-					<li>masterと同じコミットを参照している</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title wide" data-x="20500" data-y="4000">
-			<div class="centerdiv">
-				<h2>図</h2>
-				<pre>$ <code class="bash">tree .git/</code>
-<div style="font-size: 32px; line-height: 125%;"><span class="directoryblue">.git</span>/
-├── HEAD  <span class="linkyellow" >( -&gt; refs/heads/master )</span>
-├── <span class="directoryblue">objects</span>
-│   ├── <span class="directoryblue">54</span>
-│   │   └── b450dd7d7c
-│   └── <span class="directoryblue">ac</span>
-│       └── 0797189547  <span class="linkyellow" >( 親： -&gt; objects/54/b450dd7d7c )</span>
-└── <span class="directoryblue">refs</span>
-    └── <span class="directoryblue">heads</span>
-        ├── master  <span class="linkyellow" >( -&gt; objects/ac/0797189547 )</span>
-        └── newbranch  <span class="linkyellow" >( -&gt; objects/ac/0797189547 )</span></div></pre>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="20500" data-y="4800">
-			<div class="centerdiv">
-				<h2>またコミットしてみよう</h2>
-				<pre>$ <code class="bash">echo foobar &gt;&gt; README</code>
-$ <code class="bash">git add README</code>
-$ <code class="bash">git commit -m "Second child commit."</code>
-[master 22c3956] Second child commit.
- 1 file changed, 1 insertion(+)
-</pre>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="20500" data-y="5600">
-			<div class="centerdiv">
-				<h2>git log</h2>
-				<pre>$ <code class="bash">git log --graph --decorate --all </code>
-* <span class="f3">commit 22c39561 (<span class="bold"><span class="f6">HEAD</span></span>, <span class="bold"><span class="f2">master</span></span>)</span>
-<span class="f1">|</span> Date:   Fri Jul 18 18:25:20 2014 +0900
-<span class="f1">|</span>     Second child commit.
-<span class="f1">|</span>
-* <span class="f3">commit ac079718 (<span class="bold"><span class="f2">newbranch</span></span>)</span>
-<span class="f1">|</span> Date:   Fri Jul 11 14:51:49 2014 +0900
-<span class="f1">|</span>     Child commit.
-<span class="f1">|</span>
-* <span class="f3">commit 54b450dd</span>
-  Date:   Tue Jul 8 18:36:36 2014 +0900
-      Initial commit.</pre>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="20500" data-y="8000">
-			<div class="centerdiv">
-				<h2>.gitで確認④</h2>
-				<pre>$ <code class="bash">cat .git/refs/heads/newbranch</code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3
-$ <code class="bash">cat .git/refs/heads/master</code>
-22c395616a88b1e845057ad2775399a1853d4010</pre>
-				<ul>
-					<li>.git/refs/heads/newbranchが作られた</li>
-					<li>masterと同じコミットを参照している</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="22000" data-y="0">
-			<div class="centerdiv">
-				<h2>新しいブランチを使ってみよう！</h2>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="23500" data-y="0">
-			<div class="centerdiv">
-				<h2>git checkout</h2>
-				<pre>$ <code class="bash">git checkout newbranch</code>
-Switched to branch 'newbranch'
-$ <code class="bash">cat .git/HEAD</code>
-ref: refs/heads/newbranch
-$ <code class="bash">cat .git/refs/heads/newbranch</code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3
-$ <code class="bash">cat .git/refs/heads/master</code>
-22c395616a88b1e845057ad2775399a1853d4010
-</pre>
-				<ul>
-					<li>HEADがnewbranchを参照するようになった</li>
-					<li>masterは特に変わっていない</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="23500" data-y="1000">
-			<div class="centerdiv">
-				<h2>newbranchにコミット</h2>
-				<pre>$ <code class="bash">echo testtest &gt;&gt; README</code>
-$ <code class="bash">git add README</code>
-$ <code class="bash">git commit -m "Commit on newbranch."</code>
-[newbranch 163e533] Commit on newbranch.
- 1 file changed, 1 insertion(+)</pre>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="23500" data-y="2000">
-			<div class="centerdiv">
-				<h2>.git/で確認</h2>
-				<pre>$ <code class="bash">cat .git/HEAD</code>
-ref: refs/heads/newbranch
-$ <code class="bash">cat .git/refs/heads/newbranch</code>
-<b>163e533db99cf9c8bc1f30222e47975840ae2883</b>
-$ <code class="bash">cat .git/refs/heads/master</code>
-22c395616a88b1e845057ad2775399a1853d4010</pre>
-				<ul>
-					<li>newbranchは新しいコミットを参照している</li>
-					<li>master、HEADは特に変わっていない</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="23500" data-y="3000">
-			<div class="centerdiv">
-				<h2>git checkout</h2>
-				<ul>
-					<li>HEADが参照しているブランチを変えられる</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="23500" data-y="4000">
-			<div class="centerdiv">
-				<h2>ちなみに</h2>
-				<p>ブランチだけじゃなくて任意のコミットをcheckoutすることもできる</p>
-				<pre>$ <code class="bash">git checkout 54b450dd</code>
-Note: checking out '54b450dd'.
-
-You are in 'detached HEAD' state.
-...
-$ <code class="bash">cat .git/HEAD</code>
-54b450dd7d7c8280040569fc7b5e4637883e76c2</pre>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="25000" data-y="0">
-			<div class="centerdiv">
-				<h2>HEADだけじゃなくてブランチも移動しよう！</h2>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="26500" data-y="0">
-			<div class="centerdiv">
-				<h2>git reset</h2>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="28000" data-y="0">
-			<div class="centerdiv">
-				<h2>新しいブランチ作成</h2>
-				<pre>$ <code class="bash">git branch test</code>
-$ <code class="bash">cat .git/HEAD</code>
-ref: refs/heads/newbranch
-$ <code class="bash">cat .git/refs/heads/newbranch</code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3
-$ <code class="bash">cat .git/refs/heads/master</code>
-22c395616a88b1e845057ad2775399a1853d4010
-$ <code class="bash"><b>cat .git/refs/heads/test</b></code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3
-</pre>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="28000" data-y="1000">
-			<div class="centerdiv">
-				<h2>checkout</h2>
-				<pre>$ <code class="bash">git checkout test</code>
-Switched to branch 'test'
-$ <code class="bash">cat .git/HEAD</code>
-<b>ref: refs/heads/test</b>
-$ <code class="bash">cat .git/refs/heads/newbranch</code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3
-$ <code class="bash">cat .git/refs/heads/test</code>
-ac0797189547f3f0cdcf39cb170b16d2344aeaf3
-</pre>
-				<ul>
-					<li>HEADがtestを参照するようになった</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="28000" data-y="2000">
-			<div class="centerdiv">
-				<h2>masterが参照しているコミットに、testを参照させる</h2>
-			</div>
-    </div>
-
-    <div class="step problem title" data-x="28000" data-y="3000">
-			<div class="centerdiv">
-				<h2>reset</h2>
-				<pre>$ <code class="bash">git reset --hard master</code>
-HEAD is now at 22c3956 Second child commit.
-$ <code class="bash">cat .git/HEAD</code>
-ref: refs/heads/test
-$ <code class="bash">cat .git/refs/heads/test</code>
-<b>22c395616a88b1e845057ad2775399a1853d4010</b>
-$ <code class="bash">cat .git/refs/heads/master</code>
-22c395616a88b1e845057ad2775399a1853d4010
-</pre>
-				<ul>
-					<li>testも22c395616を参照している</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="28000" data-y="4000">
-			<div class="centerdiv">
-				<h2>resetのフラグ</h2>
-				<ul>
-					<li>--soft</li>
-					<li>--mixed</li>
-					<li>--hard</li>
-					<li>...</li>
-				</ul>
-			</div>
-    </div>
-
-    <div class="step problem title" data-x="29500" data-y="0">
-			<div class="centerdiv">
-				<h2>git merge...</h2>
-			</div>
-    </div>
-
-    <div class="step problem title" data-x="31000" data-y="0">
-			<div class="centerdiv">
-				<h2>...の話はしません。</h2>
-				<p>聞きたい人いますか？</p>
-			</div>
-    </div>
-
-    <div class="step problem title" data-x="32500" data-y="0">
-			<div class="centerdiv">
-				<h2>今日の最後のコマンド</h2>
-			</div>
-    </div>
-
-    <div class="step problem title" data-x="34000" data-y="0">
-			<div class="centerdiv">
-				<h2>一番怖いと言われているコマンド</h2>
-			</div>
-    </div>
-
-    <div class="step problem title" data-x="35500" data-y="0">
-			<div class="centerdiv">
-				<h2>git rebase</h2>
-			</div>
-    </div>
-
-    <div class="step problem title" data-x="37000" data-y="0">
-			<div class="centerdiv">
-				<h2>まずレポジトリーを整理</h2>
-			</div>
-    </div>
-
-    <div class="step problem title" data-x="37000" data-y="600">
-			<div class="centerdiv">
-				<pre>$ <code class="bash">git checkout master</code>
-Switched to branch 'master'
-$ <code class="bash">git branch -D newbranch</code>
-Deleted branch newbranch (was 163e533).
-$ <code class="bash">git branch -D test</code>
-Deleted branch test (was 22c3956).
-</pre>
-				<ul>
-					<li>newbranchとtestブランチを削除</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="37000" data-y="1600">
-			<div class="centerdiv">
-				<h2>ブランチ削除確認</h2>
-				<pre>$ <code class="bash">tree .git/refs</code>
-<div style="font-size: 32px; line-height: 120%;"><span class="bold"><span class="f4">.git/refs/</span></span>
-├── <span class="bold"><span class="f4">heads</span></span>
-│   └── master
-└── <span class="bold"><span class="f4">tags</span></span></div></pre>
-				<ul>
-					<li>newbranchとtestブランチは.git/refs/から消えている</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="37000" data-y="2600">
-			<div class="centerdiv">
-				<h2>test2ブランチ作成</h2>
-				<pre>$ <code class="bash">git branch test2</code></pre>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="37000" data-y="3600">
-			<div class="centerdiv">
-				<h2>masterにテストコミット</h2>
-				<pre>$ <code class="bash">echo "hello1" &gt;&gt; master-test-file </code>
-$ <code class="bash">git add master-test-file</code>
-$ <code class="bash">git commit -m 'master commit 1'</code>
-[master b27026d] master commit 1
- 1 file changed, 1 insertion(+)
- create mode 100644 master-test-file
-$ <code class="bash">echo "hello2" &gt;&gt; master-test-file </code>
-$ <code class="bash">git add master-test-file</code>
-$ <code class="bash">git commit -m 'master commit 2'</code>
-[master 55970ec] master commit 2
- 1 file changed, 1 insertion(+)</pre>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="37000" data-y="4600">
-			<div class="centerdiv">
-				<h2>test2にテストコミット</h2>
-				<pre>$ <code class="bash">git checkout test2</code>
-Switched to branch 'test2'
-$ <code class="bash">echo "foo1" &gt;&gt; test2-test-file </code>
-$ <code class="bash">git add test2-test-file</code>
-$ <code class="bash">git commit -m 'test2 commit 1'</code>
-[test2 491b512] test2 commit 1
- 1 file changed, 1 insertion(+)
- create mode 100644 test2-test-file
-$ <code class="bash">echo "foo2" &gt;&gt; test2-test-file </code>
-$ <code class="bash">git add test2-test-file</code>
-$ <code class="bash">git commit -m 'test2 commit 2'</code>
-[test2 e43ab74] test2 commit 2
- 1 file changed, 1 insertion(+)</pre>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="37000" data-y="5600">
-			<div class="centerdiv">
-				<h2>rebase</h2>
-				<pre>$ <code class="bash"><b>git rebase master</b></code>
-First, rewinding head...
-Applying: test2 commit 1
-Applying: test2 commit 2
-$ <code class="bash">ls</code>
-master-test-file  README  test2-test-file
-$ <code class="bash">git log --oneline</code>
-<span class="f3">dc2421d</span> test2 commit 2
-<span class="f3">910a5a7</span> test2 commit 1
-<span class="f3">55970ec</span> master commit 2
-<span class="f3">b27026d</span> master commit 1
-<span class="f3">22c3956</span> Second child commit.
-<span class="f3">ac07971</span> Child commit.
-<span class="f3">54b450d</span> Initial commit.</pre>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="37000" data-y="6600">
-			<div class="centerdiv">
-				<h2>コミットハッシュを注目</h2>
-				<pre>$ <code class="bash">git log --oneline</code>
-<b><span class="f3">dc2421d</span></b> test2 commit 2
-<b><span class="f3">910a5a7</span></b> test2 commit 1</pre>
-				<ul>
-					<li>コミットが書き換えられている</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="37000" data-y="7600">
-			<div class="centerdiv">
-				<h2>rebase</h2>
-				<ul>
-					<li>2つのブランチが分岐された時点から、現在のブランチを切り離して、もうひとつのブランチの最新のコミットに移動させる</li>
-				</ul>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="38500" data-y="0">
-			<div class="centerdiv">
-				<h2>レビュー</h2>
-				<dl>
-					<dt><b>git branch</b></dt>
-					<dd style="margin-left: 100px;">新しいブランチを作成</dd>
-					<dt><b>git checkout</b></dt>
-					<dd style="margin-left: 100px;">HEADが参照しているブランチを変更</dd>
-					<dt><b>git reset</b></dt>
-					<dd style="margin-left: 100px;">現在のブランチが参照しているコミットを変更</dd>
-					<dt><b>git rebase</b></dt>
-					<dd style="margin-left: 100px;">ブランチごとを移住</dd>
-				</dl>
-			</div>
-		</div>
-
-    <div class="step problem title" data-x="40000" data-y="0">
-			<div class="centerdiv">
-				<p>fin</p>
-			</div>
-		</div>
 
 		<!--
     <div class="step title" data-x="6000" data-y="0">
