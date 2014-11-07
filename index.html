@@ -53,6 +53,22 @@
 			</div>
     </div>
 
+    <div class="step problem wide" data-x="0" data-y="2000">
+			<div class="centerdiv">
+        <h2>自己紹介</h2>
+        <h3>Dennis （デニス）</h3>
+				<div style="margin-left: 10%;">
+					<p>twitter: <a href="https://twitter.com/cdepillabout">@cdepillabout</a></p>
+					<p>github: <a href="https://github.com/cdepillabout">github.com/cdepillabout</a></p>
+				</div>
+				<ul>
+					<li>Haskell, Scala, 圏論</li>
+					<li>NixOS</li>
+					<li>CTF</li>
+				</ul>
+			</div>
+    </div>
+
     <div class="step problem wide" data-x="2000" data-y="0">
 			<div class="centerdiv">
 				<h2>NixOSとは</h2>
@@ -180,7 +196,7 @@ stdenv.mkDerivation rec {
 
     <div class="step problem" data-x="24000" data-y="0">
 			<div class="centerdiv">
-				<h2>NixOSのいいところ</h2>
+				<h2>Nixのいいところ</h2>
 				<ul>
 					<li>依存関係を大切にしている</li>
 					<li>パッケージを入れたらずっと使える</li>
@@ -189,23 +205,68 @@ stdenv.mkDerivation rec {
 			</div>
     </div>
 
-    <div class="step problem wide" data-x="26000" data-y="0">
+    <div class="step problem" data-x="26000" data-y="0">
 			<div class="centerdiv">
-				<h2>maintainerになりました</h2>
-				<pre>$ <code class="bash">cat nixpkgs/lib/maintainers.nix</code>
-(...)
-<code class="nix"><span style="font-weight: 100; font-size: 80%;">campadrenalin = "Philip Horger &lt;campadrenalin@gmail.com&gt;";</span>
-<span style="font-weight: 900">cdepillabout = "Dennis Gosnell &lt;cdep.illabout@gmail.com&gt;";</span>
-<span style="font-weight: 100; font-size: 80%;">cfouche = "Chaddaï Fouché &lt;chaddai.fouche@gmail.com&gt;";</span></code>
-(...)</pre>
+				<h2>NixOSなりの構成管理</h2>
+				<ul>
+					<li>パッケージマネジャーだけじゃなくて、OSのすべての設定を関数型的に設定できる</li>
+					<li>/etc/nixos/configuration.nixにOSの設定を記述（puppetかchefみたいな感じで）</li>
+					<li>`nixos-rebuild switch`で設定を適用</li>
+				</ul>
 			</div>
     </div>
 
-    <div class="step problem wide" data-x="28000" data-y="0">
+    <div class="step problem" data-x="28000" data-y="0">
 			<div class="centerdiv">
-				<h2>開発で使えないか検討したい</h2>
+				<h2>NixOS設定適用</h2>
+				<ul>
+					<li>パッケージがインストール（例：java-1.8）</li>
+					<li>サービスが機動（例：sshd）</li>
+					<li>/etc/の中のファイルが書き換え（例：/etc/hostsに新しいホストが追加されたり）</li>
+				</ul>
 			</div>
     </div>
+
+    <div class="step problem" data-x="30000" data-y="0">
+			<div class="centerdiv">
+				<h2>puppetとかchefで出来ることはだいたい出来る</h2>
+			</div>
+    </div>
+
+    <div class="step problem" data-x="32000" data-y="0">
+			<div class="centerdiv">
+				<h2>他の機能</h2>
+				<ul>
+					<li>Nix: rubyのrbenvとかpythonのvirutalenvみたいな機能</li>
+					<li>NixOS: dockerみたいな機能</li>
+				</ul>
+			</div>
+    </div>
+
+    <div class="step problem" data-x="34000" data-y="0">
+			<div class="centerdiv">
+				<h1>Thank You</h1>
+				<h2>Questions?</h2>
+			</div>
+    </div>
+
+    <!-- <div class="step problem wide" data-x="26000" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>maintainerになりました</h2> -->
+				<!-- <pre>$ <code class="bash">cat nixpkgs/lib/maintainers.nix</code> -->
+<!-- (...) -->
+<!-- <code class="nix"><span style="font-weight: 100; font-size: 80%;">campadrenalin = "Philip Horger &lt;campadrenalin@gmail.com&gt;";</span> -->
+<!-- <span style="font-weight: 900">cdepillabout = "Dennis Gosnell &lt;cdep.illabout@gmail.com&gt;";</span> -->
+<!-- <span style="font-weight: 100; font-size: 80%;">cfouche = "Chaddaï Fouché &lt;chaddai.fouche@gmail.com&gt;";</span></code> -->
+<!-- (...)</pre> -->
+			<!-- </div> -->
+    <!-- </div> -->
+
+    <!-- <div class="step problem wide" data-x="28000" data-y="0"> -->
+			<!-- <div class="centerdiv"> -->
+				<!-- <h2>開発で使えないか検討したい</h2> -->
+			<!-- </div> -->
+    <!-- </div> -->
 
 		<!--
     <div class="step problem title verywide" data-x="6000" data-y="0">
